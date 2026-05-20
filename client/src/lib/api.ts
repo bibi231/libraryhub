@@ -50,7 +50,10 @@ api.interceptors.response.use(
       const refreshToken = localStorage.getItem('refreshToken');
       if (!refreshToken) {
         localStorage.clear();
-        window.location.href = '/login';
+        const publicPaths = ['/', '/catalog'];
+        if (!publicPaths.includes(window.location.pathname) && !window.location.pathname.startsWith('/books/')) {
+          window.location.href = '/login';
+        }
         return Promise.reject(error);
       }
 
@@ -66,7 +69,10 @@ api.interceptors.response.use(
       } catch (err) {
         processQueue(err, null);
         localStorage.clear();
-        window.location.href = '/login';
+        const publicPaths = ['/', '/catalog'];
+        if (!publicPaths.includes(window.location.pathname) && !window.location.pathname.startsWith('/books/')) {
+          window.location.href = '/login';
+        }
         return Promise.reject(err);
       } finally {
         isRefreshing = false;
