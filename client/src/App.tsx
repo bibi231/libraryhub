@@ -7,6 +7,9 @@ import { useAuthStore } from '@/stores/authStore';
 const LandingPage = lazy(() => import('@/pages/public/LandingPage').then((m) => ({ default: m.LandingPage })));
 const CatalogPage = lazy(() => import('@/pages/public/CatalogPage').then((m) => ({ default: m.CatalogPage })));
 const BookDetailPage = lazy(() => import('@/pages/public/BookDetailPage').then((m) => ({ default: m.BookDetailPage })));
+const EbooksPage = lazy(() => import('@/pages/public/EbooksPage').then((m) => ({ default: m.EbooksPage })));
+const EbookReaderPage = lazy(() => import('@/pages/public/EbookReaderPage').then((m) => ({ default: m.EbookReaderPage })));
+const AudiobooksPage = lazy(() => import('@/pages/public/AudiobooksPage').then((m) => ({ default: m.AudiobooksPage })));
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage').then((m) => ({ default: m.LoginPage })));
 const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage').then((m) => ({ default: m.RegisterPage })));
 
@@ -65,6 +68,9 @@ function AppRoutes() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/books/:id" element={<BookDetailPage />} />
+        <Route path="/ebooks" element={<EbooksPage />} />
+        <Route path="/ebooks/:bookId/read" element={<EbookReaderPage />} />
+        <Route path="/audiobooks" element={<AudiobooksPage />} />
 
         {/* Auth */}
         <Route path="/login" element={<LoginPage />} />

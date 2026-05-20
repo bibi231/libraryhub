@@ -37,6 +37,23 @@ app.get('/health', (_req, res) => {
 });
 
 import { seed } from './utils/seed';
+import Book from './models/Book';
+import User from './models/User';
+
+// Public stats endpoint
+app.get('/api/stats', async (_req, res) => {
+  try {
+    const [totalBooks, totalEbooks, totalAudiobooks, totalMembers] = await Promise.all([
+      Book.countDocuments({ isActive: true }),
+      Book.countDocuments({ isActive: true, format: 'ebook' }),
+      Book.countDocuments({ isActive: true, format: 'audiobook' }),
+      User.countDocuments({ isActive: true, role: 'patron' }),
+    ]);
+    res.json({ success: true, data: { totalBooks, totalEbooks, totalAudiobooks, totalMembers } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Production Seeding Utility
 app.post('/api/run-seed', async (_req, res) => {

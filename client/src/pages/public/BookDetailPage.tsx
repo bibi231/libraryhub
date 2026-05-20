@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, BookOpen, Calendar, Building2, Hash, MapPin, Bookmark, Share2, Download, ExternalLink } from 'lucide-react';
+import { ArrowLeft, BookOpen, Calendar, Building2, Hash, MapPin, Bookmark, Download, ExternalLink, Headphones } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { api, getErrorMessage } from '@/lib/api';
@@ -186,23 +186,46 @@ export function BookDetailPage() {
 
             {/* Actions */}
             <div className="flex flex-wrap gap-3 mt-6">
-              {isDigital && book.digitalUrl ? (
+              {book.format === 'ebook' ? (
                 <>
                   <Button
                     variant="primary"
                     size="lg"
-                    icon={<ExternalLink className="w-4 h-4" />}
-                    onClick={() => window.open(book.digitalUrl, '_blank')}
+                    icon={<BookOpen className="w-4 h-4" />}
+                    onClick={() => navigate(`/ebooks/${book._id}/read`)}
                   >
                     Read Online
                   </Button>
+                  {(book.ebookUrl || book.digitalUrl) && (
+                    <Button
+                      variant="secondary"
+                      size="lg"
+                      icon={<ExternalLink className="w-4 h-4" />}
+                      onClick={() => window.open(book.ebookUrl || book.digitalUrl, '_blank')}
+                    >
+                      Open Source
+                    </Button>
+                  )}
+                </>
+              ) : book.format === 'audiobook' ? (
+                <>
+                  {(book.audiobookUrl || book.digitalUrl) && (
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      icon={<Headphones className="w-4 h-4" />}
+                      onClick={() => window.open(book.audiobookUrl || book.digitalUrl, '_blank')}
+                    >
+                      Listen Now
+                    </Button>
+                  )}
                   <Button
                     variant="secondary"
                     size="lg"
-                    icon={<Download className="w-4 h-4" />}
-                    onClick={() => window.open(book.digitalUrl, '_blank')}
+                    icon={<ExternalLink className="w-4 h-4" />}
+                    onClick={() => window.open(book.audiobookUrl || book.digitalUrl, '_blank')}
                   >
-                    Download
+                    Open Source
                   </Button>
                 </>
               ) : (

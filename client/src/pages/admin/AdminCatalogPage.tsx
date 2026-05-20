@@ -18,7 +18,7 @@ const emptyForm = {
   title: '', authors: '', isbn: '', publisher: '', publicationYear: '',
   category: 'Fiction', genre: '', format: 'physical', description: '',
   coverImage: '', totalCopies: '1', shelfLocation: '', condition: 'good',
-  tags: '', digitalUrl: '',
+  tags: '', digitalUrl: '', ebookUrl: '', audiobookUrl: '', mediaType: '',
 };
 
 export function AdminCatalogPage() {
@@ -71,6 +71,8 @@ export function AdminCatalogPage() {
       coverImage: book.coverImage || '', totalCopies: book.totalCopies.toString(),
       shelfLocation: book.shelfLocation || '', condition: book.condition || 'good',
       tags: book.tags?.join(', ') || '', digitalUrl: book.digitalUrl || '',
+      ebookUrl: book.ebookUrl || '', audiobookUrl: book.audiobookUrl || '',
+      mediaType: book.mediaType || '',
     });
     setModalOpen(true);
   }
@@ -219,8 +221,23 @@ export function AdminCatalogPage() {
             <Select label="Condition" value={form.condition} onChange={(e) => update('condition', e.target.value)} options={BOOK_CONDITIONS.map((c) => ({ value: c.value, label: c.label }))} />
           </div>
           <Input label="Cover Image URL" value={form.coverImage} onChange={(e) => update('coverImage', e.target.value)} placeholder="https://..." />
-          {(form.format === 'ebook' || form.format === 'audiobook') && (
-            <Input label="Digital URL" value={form.digitalUrl} onChange={(e) => update('digitalUrl', e.target.value)} placeholder="https://..." />
+          {form.format === 'ebook' && (
+            <>
+              <Input label="E-Book URL (Gutenberg / Archive.org)" value={form.ebookUrl} onChange={(e) => update('ebookUrl', e.target.value)} placeholder="https://www.gutenberg.org/files/..." />
+              <div className="grid grid-cols-2 gap-4">
+                <Input label="Media Type" value={form.mediaType} onChange={(e) => update('mediaType', e.target.value)} placeholder="gutenberg / archive / external" />
+                <Input label="Digital URL (legacy)" value={form.digitalUrl} onChange={(e) => update('digitalUrl', e.target.value)} placeholder="https://..." />
+              </div>
+            </>
+          )}
+          {form.format === 'audiobook' && (
+            <>
+              <Input label="Audiobook URL (LibriVox / Archive.org)" value={form.audiobookUrl} onChange={(e) => update('audiobookUrl', e.target.value)} placeholder="https://librivox.org/..." />
+              <div className="grid grid-cols-2 gap-4">
+                <Input label="Media Type" value={form.mediaType} onChange={(e) => update('mediaType', e.target.value)} placeholder="librivox / archive / external" />
+                <Input label="Digital URL (legacy)" value={form.digitalUrl} onChange={(e) => update('digitalUrl', e.target.value)} placeholder="https://..." />
+              </div>
+            </>
           )}
           <Textarea label="Description" value={form.description} onChange={(e) => update('description', e.target.value)} rows={3} placeholder="Book synopsis..." />
           <Input label="Tags (comma-separated)" value={form.tags} onChange={(e) => update('tags', e.target.value)} placeholder="nigeria, fiction, classic" />

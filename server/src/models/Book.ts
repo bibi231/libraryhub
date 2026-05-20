@@ -18,6 +18,9 @@ export interface IBookDocument extends Document {
   condition: BookCondition;
   tags: string[];
   digitalUrl?: string;
+  ebookUrl?: string;
+  audiobookUrl?: string;
+  mediaType?: string;
   totalBorrows: number;
   isActive: boolean;
   createdAt: Date;
@@ -54,6 +57,9 @@ const BookSchema = new Schema<IBookDocument>(
     condition: { type: String, enum: ['good', 'fair', 'poor', 'damaged'], default: 'good' },
     tags: [{ type: String }],
     digitalUrl: { type: String },
+    ebookUrl: { type: String },
+    audiobookUrl: { type: String },
+    mediaType: { type: String },
     totalBorrows: { type: Number, default: 0 },
     isActive: { type: Boolean, default: true },
   },
