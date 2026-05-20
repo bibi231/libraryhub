@@ -3,7 +3,7 @@
           "target": "ES2020",
           "useDefineForClassFields": true,
           "lib": ["ES2020", "DOM", "DOM.Iterable"],
-          "module": "ESNext",
+          "module": "ESNext",h
           "skipLibCheck": true,
           "moduleResolution": "bundler",
           "allowImportingTsExtensions": true,
@@ -20,7 +20,7 @@
                   "@libraryhub/shared": ["../shared/types/index.ts"],
                   "@/*": ["./src/*"]
           },
-          "ignoreDeprecations": "5.0"
+          "ignoreDeprecations": "6.0"
     },
     "include": ["src", "../shared/types"],
     "references": [{ "path": "./tsconfig.node.json" }]
