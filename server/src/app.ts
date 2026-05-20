@@ -36,6 +36,18 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+import { seed } from './utils/seed';
+
+// Production Seeding Utility
+app.post('/api/run-seed', async (_req, res) => {
+  try {
+    await seed();
+    res.json({ status: 'ok', message: 'Seed complete' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
