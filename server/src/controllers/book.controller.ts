@@ -5,7 +5,7 @@ import Book from '../models/Book';
 import { sendSuccess, sendError } from '../utils/response';
 import type { AuthRequest } from '../middleware/auth';
 
-const bookSchema = z.object({
+const bookSchema = z.object({h
   title: z.string().min(1),
   authors: z.array(z.string()).min(1),
   isbn: z.string().optional(),
@@ -75,7 +75,7 @@ export async function getBook(req: Request, res: Response, next: NextFunction): 
     if (!book) { sendError(res, 'Book not found', 404); return; }
     const related = await Book.find({
       category: book.category, _id: { $ne: book._id }, isActive: true,
-    }).limit(5).select('title authors coverImage availableCopies totalCopies');
+    }).limit(5).select('title authors coverImage availableCopies totalCopies category format tags totalBorrows category format tags totalBorrows');
     sendSuccess(res, { book, related });
   } catch (err) {
     next(err);
