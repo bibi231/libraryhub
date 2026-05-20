@@ -8,10 +8,14 @@ import Reservation from '../models/Reservation';
 import Fine from '../models/Fine';
 import Notification from '../models/Notification';
 
-async function seed() {
-  const uri = process.env.MONGODB_URI!;
-  await mongoose.connect(uri);
-  console.log('Connected to MongoDB');
+export async function seed() {
+  if (mongoose.connection.readyState !== 1) {
+    const uri = process.env.MONGODB_URI!;
+    await mongoose.connect(uri);
+    console.log('Connected to MongoDB. Starting seed...');
+  } else {
+    console.log('Already connected to MongoDB. Starting seed...');
+  }
 
   // Clear
   await Promise.all([
@@ -828,7 +832,8 @@ async function seed() {
   console.log('Patron:    amaka@libraryhub.ng / Patron1234! (has fine)');
   console.log('Patron:    tunde@libraryhub.ng / Patron1234!');
 
-  await mongoose.disconnect();
 }
 
-seed().catch(console.error);
+if (require.main === module) {
+  seed().then(() => mongoose.disconnect()).catch(console.error);
+}
