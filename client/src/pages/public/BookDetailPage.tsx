@@ -128,7 +128,7 @@ export function BookDetailPage() {
               {book.title}
             </h1>
             <p className="text-lg text-stone-500 dark:text-stone-400 mb-4">
-              by {book.authors.join(', ')}
+              by {(book.authors || []).join(', ')}
             </p>
 
             <BookAvailabilityBadge available={book.availableCopies} total={book.totalCopies} />
@@ -168,9 +168,9 @@ export function BookDetailPage() {
             </dl>
 
             {/* Tags */}
-            {book.tags.length > 0 && (
+            {(book.tags || []).length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4">
-                {book.tags.map((tag) => (
+                {(book.tags || []).map((tag) => (
                   <span key={tag} className="px-2.5 py-0.5 bg-stone-100 dark:bg-navy-700 text-stone-600 dark:text-stone-300 rounded-full text-xs">
                     #{tag}
                   </span>
