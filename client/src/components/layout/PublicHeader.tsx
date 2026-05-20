@@ -34,8 +34,11 @@ export function PublicHeader() {
             <Link to="/catalog" className="px-3 py-2 rounded-lg text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-navy-800 hover:text-stone-900 dark:hover:text-white transition-all">
               Catalog
             </Link>
-            <Link to="/catalog?format=ebook" className="px-3 py-2 rounded-lg text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-navy-800 hover:text-stone-900 dark:hover:text-white transition-all">
+            <Link to="/ebooks" className="px-3 py-2 rounded-lg text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-navy-800 hover:text-stone-900 dark:hover:text-white transition-all">
               E-Books
+            </Link>
+            <Link to="/audiobooks" className="px-3 py-2 rounded-lg text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-navy-800 hover:text-stone-900 dark:hover:text-white transition-all">
+              Audiobooks
             </Link>
             {isAuthenticated && user?.role !== 'patron' && (
               <Link to="/admin" className="px-3 py-2 rounded-lg text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-navy-800 transition-all">
@@ -115,7 +118,8 @@ export function PublicHeader() {
         {menuOpen && (
           <div className="md:hidden py-3 border-t border-stone-100 dark:border-navy-800">
             <Link to="/catalog" className="block px-3 py-2 rounded-lg text-sm text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-navy-800">Catalog</Link>
-            <Link to="/catalog?format=ebook" className="block px-3 py-2 rounded-lg text-sm text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-navy-800">E-Books</Link>
+            <Link to="/ebooks" className="block px-3 py-2 rounded-lg text-sm text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-navy-800">E-Books</Link>
+            <Link to="/audiobooks" className="block px-3 py-2 rounded-lg text-sm text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-navy-800">Audiobooks</Link>
             {!isAuthenticated && (
               <>
                 <Link to="/login" className="block px-3 py-2 rounded-lg text-sm text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-navy-800">Sign In</Link>

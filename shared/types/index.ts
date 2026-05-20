@@ -66,6 +66,9 @@ export interface IBook {
   condition: BookCondition;
   tags: string[];
   digitalUrl?: string;
+  ebookUrl?: string;
+  audiobookUrl?: string;
+  mediaType?: string;
   totalBorrows: number;
   isActive: boolean;
   createdAt: string;

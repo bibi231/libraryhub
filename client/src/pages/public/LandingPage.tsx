@@ -26,9 +26,9 @@ export function LandingPage() {
     queryFn: () => api.get('/books/popular'),
   });
 
-  const { data: overview } = useQuery({
-    queryKey: ['overview'],
-    queryFn: () => api.get('/reports/overview').then((r) => r.data.data),
+  const { data: stats } = useQuery({
+    queryKey: ['stats'],
+    queryFn: () => api.get('/stats').then((r) => r.data.data),
   });
 
   const books = newArrivals?.data?.data || [];
@@ -89,9 +89,9 @@ export function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-3 gap-8 text-center">
             {[
-              { icon: BookOpen, value: overview?.totalBooks ? `${overview.totalBooks.toLocaleString()}+` : '30,000+', label: 'Books & Resources' },
-              { icon: Users, value: overview?.totalPatrons ? `${overview.totalPatrons.toLocaleString()}+` : '5,000+', label: 'Active Members' },
-              { icon: TrendingUp, value: overview?.activeBorrows ? `${overview.activeBorrows.toLocaleString()}+` : '1,200+', label: 'Books Borrowed Monthly' },
+              { icon: BookOpen, value: stats?.totalBooks ? `${stats.totalBooks.toLocaleString()}+` : '60+', label: 'Books & Resources' },
+              { icon: Users, value: stats?.totalMembers ? `${stats.totalMembers.toLocaleString()}+` : '5+', label: 'Active Members' },
+              { icon: TrendingUp, value: stats?.totalEbooks ? `${stats.totalEbooks.toLocaleString()}+` : '10+', label: 'E-Books & Audiobooks' },
             ].map(({ icon: Icon, value, label }) => (
               <motion.div
                 key={label}
