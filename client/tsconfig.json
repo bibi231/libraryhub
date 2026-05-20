@@ -20,7 +20,7 @@
                   "@libraryhub/shared": ["../shared/types/index.ts"],
                   "@/*": ["./src/*"]
           },
-          "ignoreDeprecations": "6.0"
+          "ignoreDeprecations": "5.0"
     },
     "include": ["src", "../shared/types"],
     "references": [{ "path": "./tsconfig.node.json" }]
