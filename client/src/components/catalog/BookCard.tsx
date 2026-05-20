@@ -58,7 +58,7 @@ export function BookCard({ book, onAddToList, inList }: BookCardProps) {
           {/* Category bookmark */}
           <div className="absolute top-0 right-3 w-6 h-10 bg-terracotta-600 flex items-end justify-center pb-1.5" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)' }}>
             <span className="text-white" style={{ fontSize: 7, lineHeight: 1 }}>
-              {book.category.slice(0, 3).toUpperCase()}
+              {(book.category || 'GEN').slice(0, 3).toUpperCase()}
             </span>
           </div>
         </div>
@@ -69,7 +69,7 @@ export function BookCard({ book, onAddToList, inList }: BookCardProps) {
             {book.title}
           </h3>
           <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 truncate">
-            {book.authors.join(', ')}
+            {(book.authors || []).join(', ')}
           </p>
           <div className="mt-3">
             <BookAvailabilityBadge available={book.availableCopies} total={book.totalCopies} />
