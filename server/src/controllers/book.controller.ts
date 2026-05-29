@@ -5,7 +5,7 @@ import Book from '../models/Book';
 import { sendSuccess, sendError } from '../utils/response';
 import type { AuthRequest } from '../middleware/auth';
 
-const bookSchema = z.object({h
+const bookSchema = z.object({
   title: z.string().min(1),
   authors: z.array(z.string()).min(1),
   isbn: z.string().optional(),
